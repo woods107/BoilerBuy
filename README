@@ -1,0 +1,28 @@
+Project Name: BoilerBuy
+=======================
+
+Team Members
+------------------
+Michael Woods	-	woods107@purdue.edu
+Piper Williams	-	will1742@purdue.edu
+
+
+Technologies and Services
+-------------
+Node.js
+MySQL
+AWS
+
+
+Description
+-------------
+It is not too difficult to find a local buy/sell/trade group on social
+media sites such as Facebook, but what do you do if you don't have an
+account yourself, of if there are multiple pages for your area?
+
+The idea behind BoilerBuy is to provide a central location for people
+who are looking to sell, while also making it easier for buyers to sift
+through postings. It will have a simple account system to keep track of
+who made a posting and their provided contact information, and simple 
+searching/sorting of available entries, while periodically removing
+old postings.
