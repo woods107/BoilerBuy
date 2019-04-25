@@ -20,7 +20,7 @@ class Post(db.Model):
     # allows us to list posts chronologically
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     # allows us to attach users to their posts
-    user_id = db.Column(db.Integer, db.ForeignKey('user_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
