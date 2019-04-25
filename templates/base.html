@@ -3,7 +3,7 @@
   <head>
   
     <meta charset="utf-8">
-    <title>BoilerBuy - HOME</title>
+    <title>BoilerBuy</title>
     <link rel="stylesheet" href="static/style.css">
     
   </head>
@@ -11,7 +11,24 @@
   
     <!-- page content -->
     <!-- TODO Navbar will go here when I get around to it-->
+    
+    <div>
+    <h1>BoilerBuy</h1>
+    <p><a href="{{ url_for('index') }}">Home</a>  |  <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+    
     <hr>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+	{% for message in messages %}
+	<li>{{ message }}</li>
+	{% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
     {% block content %}{% endblock %}
 
   </body>
