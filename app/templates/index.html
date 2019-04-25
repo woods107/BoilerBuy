@@ -1,0 +1,16 @@
+{% extends "base.html" %}    
+
+{% block content %}
+
+{% for post in postings %}
+<div>
+    
+    <!-- Add image and user object stuff later -->
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.desc }}</p>
+    <p>Listed by {{ post.user.name }}</p>
+    
+</div>
+{% endfor %}
+
+{% endblock %}
