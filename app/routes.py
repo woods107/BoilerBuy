@@ -16,12 +16,21 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}'.format(
-            form.username.data))
+    # check if already logged in
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
-    return render_template('login.html', form=form)
+    form = LoginForm()
+    # else if username accepted
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        # if user not exists or pass not correct
+        if user is None or not user.check_password(form.password.data)
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        # user is correct and password is correct
+        login_user(user, rememeber=form.rememeber_me.data)
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign in', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
