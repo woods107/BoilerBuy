@@ -23,6 +23,14 @@ account yourself, of if there are multiple pages for your area?
 The idea behind BoilerBuy is to provide a central location for people
 who are looking to sell, while also making it easier for buyers to sift
 through postings. It will have a simple account system to keep track of
-who made a posting and their provided contact information, and simple 
+who made a posting and their provided contact information, and simple
 searching/sorting of available entries, while periodically removing
 old postings.
+
+NOTES
+------
+1. Run 'sudo pip install flask-sqlalchemy'
+  -Run 'sudo pip install flask-migrate'
+    - these are necessary for db work
+2. Run 'flask db init' in venv
+  - this sets up migration directories
