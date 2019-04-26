@@ -29,9 +29,9 @@ class User(UserMixin, db.Model):
     # def get_id(self):
     #     return self.id
 
-    @login.user_loader
-    def load_user(id):
-        return User.query.get(int(id))
+    # @login.user_loader
+    # def load_user(id):
+    #     return User.query.get(int(id))
 
 # defines listings within db
 class Post(db.Model):
