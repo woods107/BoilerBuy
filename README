@@ -9,8 +9,8 @@ Piper Williams	-	will1742@purdue.edu
 
 Technologies and Services
 -------------
-Node.js
-MySQL
+Flask
+SQLite
 AWS
 
 
@@ -32,5 +32,8 @@ NOTES
 1. Run 'sudo pip install flask-sqlalchemy'
   -Run 'sudo pip install flask-migrate'
     - these are necessary for db work
-2. Run 'flask db init' in venv
+   Also need to install:
+    -flask-wtf
+    -flask-login
+2. Run 'flask db init' in venv (one-time)
   - this sets up migration directories
