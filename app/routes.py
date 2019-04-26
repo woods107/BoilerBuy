@@ -39,6 +39,7 @@ def register():
     if form.validate_on_submit():
         flash('Account registered for user {} with email {}'.format(
             form.username.data, form.email.data))
+            # TODO: Add check to see that user doesn not already exist
         u = User(username=form.username.data, email=form.email.data, password=form.password.data)
         db.session.add(u)
         db.session.commit()
