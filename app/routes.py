@@ -25,9 +25,12 @@ def index():
     return render_template('index.html', postings=postins, sort=1, form=form)
 
 
-@app.route('/indexAsc')
+@app.route('/indexAsc', methods=['GET', 'POST'])
 def indexAsc():
     form = SearchForm()
+    if form.term.data is not None:
+        postings = Post.query.filter_by(uname=form.term.data).all()
+        return render_template('index.html', postings=postings, sort=0, form=form)
     postings = Post.query.all()
     return render_template('index.html', postings=postings, sort=0, form=form)
 
