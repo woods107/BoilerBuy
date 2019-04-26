@@ -4,17 +4,32 @@ from app import app, db
 from app.forms import LoginForm
 from app.forms import RegisterForm
 from app.forms import SubmitForm
+from app.forms import SearchForm
 from app.models import User, Post
 from werkzeug.urls import url_parse
+from sqlalchemy import desc, or_
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     #Use placeholder dummy list of posts for the moment
     #User object will contain username, real name, and contact info fields (eventually)
     #Posts will contain title, description, posting date, object of user, and a photo
-    postings = Post.query.all()#= []
-    return render_template('index.html', postings=postings)
+    form = SearchForm()
+    #postings = Post.query.order_by(Post.id.desc()).filter(or_(Post.title.like(form.term.data), Post.body.like(form.term.data)))
+    #postings = postings.order_by(Post.id.desc())#.all()
+    if form.term.data is not None:
+        postings = Post.query.order_by(Post.id.desc()).filter_by(uname=form.term.data).all()
+        return render_template('index.html', postings=postings, sort=1, form=form)
+    postins =  Post.query.order_by(Post.id.desc()).all()
+    return render_template('index.html', postings=postins, sort=1, form=form)
+
+
+@app.route('/indexAsc')
+def indexAsc():
+    form = SearchForm()
+    postings = Post.query.all()
+    return render_template('index.html', postings=postings, sort=0, form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])

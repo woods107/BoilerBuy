@@ -20,3 +20,8 @@ class SubmitForm(FlaskForm):
     body = StringField('Description', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+
+class SearchForm(FlaskForm):
+    term = StringField('Search Terms')
+    search = SubmitField('Search', validators=[DataRequired()])
+
