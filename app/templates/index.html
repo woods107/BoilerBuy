@@ -8,10 +8,11 @@
     <!-- Add image and user object stuff later -->
     <h3>{{ post.title }}</h3>
     <p>{{ post.body }}</p>
-    <p>{{ post.email }}<br>
+    <p>{{ post.contact }}<br>
     {{ post.timestamp }}</p>
-    <!-- <p>Listed by {{ post.user.name }}</p> -->
-    
+    <p>Listed by {{ post.uname }}</p>
+    <hr>
+
 </div>
 {% endfor %}
 

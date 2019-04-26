@@ -60,10 +60,9 @@ def submit():
     if form.validate_on_submit():
         flash('Submission \'{}\' made successfully'.format(
             form.title.data))
-            # TODO: Add check to see that user doesn not already exist
-        #u = User(username=form.username.data, email=form.email.data, password=form.password.data)
-        #db.session.add(u)
-        #db.session.commit()
+        p = Post(title=form.title.data, body=form.body.data, user_id=current_user.id, uname=current_user.username, contact=current_user.email)
+        db.session.add(p)
+        db.session.commit()
         return redirect(url_for('index'))
     return render_template('submit.html', form=form)
 
