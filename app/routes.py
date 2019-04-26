@@ -25,7 +25,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         # if user not exists or pass not correct
-        if user is None or not user.check_password(form.password.data)
+        if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
             return redirect(url_for('login'))
         # user is correct and password is correct
@@ -58,4 +58,3 @@ def submit():
         #db.session.commit()
         return redirect(url_for('index'))
     return render_template('submit.html', form=form)
-
