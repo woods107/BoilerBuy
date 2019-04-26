@@ -4,7 +4,7 @@
   
     <meta charset="utf-8">
     <title>BoilerBuy</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
     
   </head>
   <body>
@@ -12,10 +12,9 @@
     <!-- page content -->
     <!-- TODO Navbar will go here when I get around to it-->
     
-    <div>
+    <div id="format">
     <h1>BoilerBuy</h1>
     <p><a href="{{ url_for('index') }}">Home</a>  |  <a href="{{ url_for('submit') }}">Submit</a>  |  <a href="{{ url_for('register') }}">Register</a>  |  {% if current_user.is_anonymous %}<a href="{{ url_for('login') }}">Login</a>{% else %}<a href="{{ url_for('logout') }}">Logout</a>{% endif %}</p>
-    </div>
     
     <hr>
 
@@ -30,6 +29,7 @@
     {% endwith %}
 
     {% block content %}{% endblock %}
+    </div>
 
   </body>
 </html>
