@@ -2,6 +2,7 @@ from flask import render_template, flash, redirect, url_for
 from app import app, db
 from app.forms import LoginForm
 from app.forms import RegisterForm
+from app.forms import SubmitForm
 from app.models import User, Post
 
 @app.route('/')
@@ -37,7 +38,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/submit', methods=['GET', 'POST'])
-def register():
+def submit():
     form = SubmitForm()
     if form.validate_on_submit():
         flash('Submission \'{}\' made successfully'.format(
@@ -47,5 +48,5 @@ def register():
         #db.session.add(u)
         #db.session.commit()
         return redirect(url_for('index'))
-    return render_template('register.html', form=form)
+    return render_template('submit.html', form=form)
 
