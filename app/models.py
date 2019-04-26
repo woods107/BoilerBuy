@@ -36,7 +36,7 @@ class User(UserMixin, db.Model):
 # defines listings within db
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title=db.Column(db.String(128))
+    title = db.Column(db.String(128))
     body = db.Column(db.String(256))
     # allows us to list posts chronologically
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

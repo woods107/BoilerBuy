@@ -7,8 +7,10 @@
     
     <!-- Add image and user object stuff later -->
     <h3>{{ post.title }}</h3>
-    <p>{{ post.desc }}</p>
-    <p>Listed by {{ post.user.name }}</p>
+    <p>{{ post.body }}</p>
+    <p>{{ post.email }}<br>
+    {{ post.timestamp }}</p>
+    <!-- <p>Listed by {{ post.user.name }}</p> -->
     
 </div>
 {% endfor %}
