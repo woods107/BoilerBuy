@@ -30,7 +30,7 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         # user is correct and password is correct
-        login_user(user, rememeber=form.rememeber_me.data)
+        login_user(user)
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign in', form=form)
 
@@ -41,7 +41,8 @@ def register():
         flash('Account registered for user {} with email {}'.format(
             form.username.data, form.email.data))
             # TODO: Add check to see that user doesn not already exist
-        u = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        u = User(username=form.username.data, email=form.email.data)
+        u.set_password(form.password.data)
         db.session.add(u)
         db.session.commit()
         return redirect(url_for('index'))
