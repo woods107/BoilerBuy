@@ -9,7 +9,7 @@ app.config.from_object(Config)
 # database instance handlers
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+login = LoginManager(app)
 
-login = LoginManager
 # include models to organize dbs
 from app import routes, models
