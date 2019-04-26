@@ -58,13 +58,17 @@ def login():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        flash('Account registered for user {} with email {}'.format(
-            form.username.data, form.email.data))
             # TODO: Add check to see that user doesn not already exist
-        u = User(username=form.username.data, email=form.email.data)
-        u.set_password(form.password.data)
-        db.session.add(u)
-        db.session.commit()
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None:
+            flash('Account registered for user {} with email {}'.format(
+            form.username.data, form.email.data))
+            u = User(username=form.username.data, email=form.email.data)
+            u.set_password(form.password.data)
+            db.session.add(u)
+            db.session.commit()
+            return redirect(url_for('index'))
+        flash('Username already in use')
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
 
