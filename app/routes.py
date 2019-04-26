@@ -1,10 +1,11 @@
-from flask import render_template, flash, redirect, url_for
-from flask_login import current_user, login_user
+from flask import render_template, flash, redirect, url_for, request
+from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
 from app.forms import LoginForm
 from app.forms import RegisterForm
 from app.forms import SubmitForm
 from app.models import User, Post
+from werkzeug.urls import url_parse
 
 @app.route('/')
 @app.route('/index')
@@ -31,6 +32,10 @@ def login():
             return redirect(url_for('login'))
         # user is correct and password is correct
         login_user(user)
+#        next_page = request.args.get('next')
+#        if not next_page or url_parse(next_page).netloc != '':
+#            next_page = url_for('index')
+#        return redirect(url_for(next_page))
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign in', form=form)
 
@@ -49,6 +54,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/submit', methods=['GET', 'POST'])
+@login_required
 def submit():
     form = SubmitForm()
     if form.validate_on_submit():
@@ -60,3 +66,8 @@ def submit():
         #db.session.commit()
         return redirect(url_for('index'))
     return render_template('submit.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
