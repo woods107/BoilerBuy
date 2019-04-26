@@ -1,4 +1,5 @@
 from flask import render_template, flash, redirect, url_for
+from flask_login import current_user, login_user
 from app import app, db
 from app.forms import LoginForm
 from app.forms import RegisterForm
@@ -17,12 +18,21 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}'.format(
-            form.username.data))
+    # check if already logged in
+    if current_user.is_authenticated:
         return redirect(url_for('index'))
-    return render_template('login.html', form=form)
+    form = LoginForm()
+    # else if username accepted
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        # if user not exists or pass not correct
+        if user is None or not user.check_password(form.password.data):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        # user is correct and password is correct
+        login_user(user)
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign in', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -31,7 +41,8 @@ def register():
         flash('Account registered for user {} with email {}'.format(
             form.username.data, form.email.data))
             # TODO: Add check to see that user doesn not already exist
-        u = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        u = User(username=form.username.data, email=form.email.data)
+        u.set_password(form.password.data)
         db.session.add(u)
         db.session.commit()
         return redirect(url_for('index'))
@@ -49,4 +60,3 @@ def submit():
         #db.session.commit()
         return redirect(url_for('index'))
     return render_template('submit.html', form=form)
-
