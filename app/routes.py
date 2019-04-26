@@ -12,9 +12,9 @@ def index():
     postings = [
             {
                 'user': {'name': 'jane'},
-                'title': 'Test Title 1', 
+                'title': 'Test Title 1',
                 'desc': 'Test Description 1'
-            },        
+            },
             {
                 'user': {'name': 'joseph'},
                 'title': 'Test Title 2',
@@ -39,6 +39,8 @@ def register():
     if form.validate_on_submit():
         flash('Account registered for user {} with email {}'.format(
             form.username.data, form.email.data))
+        u = User(username=form.username.data, email=form.email.data, password=form.password.data)
+        db.session.add(u)
+        db.session.commit()
         return redirect(url_for('index'))
     return render_template('register.html', form=form)
-
